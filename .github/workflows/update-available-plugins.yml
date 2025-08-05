@@ -2,7 +2,7 @@ name: Update Available-Plugins Table
 
 on:
   schedule:
-    - cron: '50 12 * * *'    # at minute 50 of hour 12 UTC, every day (the first run will be today at 12:50)
+    - cron: '53 12 * * *'    # at minute 50 of hour 12 UTC, every day (the first run will be today at 12:50)
   workflow_dispatch:
 
 jobs:
