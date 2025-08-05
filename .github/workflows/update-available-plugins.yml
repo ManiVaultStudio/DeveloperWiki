@@ -1,10 +1,9 @@
 name: Update Available-Plugins Table
 
 on:
-  workflow_dispatch:      # manual trigger
-  push:
-    branches:
-      - test-auto-update-available-plugins
+  schedule:
+    - cron: '50 12 * * *'    # at minute 50 of hour 12 UTC, every day (the first run will be today at 12:50)
+  workflow_dispatch:
 
 jobs:
   regen-table:
