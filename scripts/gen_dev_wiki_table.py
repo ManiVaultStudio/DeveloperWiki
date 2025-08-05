@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import os
 import sys
-import subprocess
 import requests
-import json
+from datetime import datetime
 
 OWNER = "ManiVaultStudio"
 REPOS = [
@@ -74,4 +73,9 @@ for repo, ptype, branch in REPOS:
         f" | {active} | {status} |"
     )
 
+# Append a timestamp footer
+now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+lines.append(f"\n_Last status checked at {now}_")
+
+# Output
 print("\n".join(lines))
