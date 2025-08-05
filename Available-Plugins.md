@@ -14,3 +14,5 @@
 | [Image Loader](https://github.com/ManiVaultStudio/ImageLoaderPlugin) | IO | 1.3 | 0.1.0 | ![last commit](https://img.shields.io/github/last-commit/ManiVaultStudio/ImageLoaderPlugin/master) | ![ci-build](https://github.com/ManiVaultStudio/ImageLoaderPlugin/actions/workflows/build.yml/badge.svg?branch=master) |
 | [HDF5Loader](https://github.com/ManiVaultStudio/HDF5Loader) | IO | 1.3 | cytosploreviewer, 1.4 | ![last commit](https://img.shields.io/github/last-commit/ManiVaultStudio/HDF5Loader/master) | ![ci-build](https://github.com/ManiVaultStudio/HDF5Loader/actions/workflows/build.yml/badge.svg?branch=master) |
 | [UMAP Analysis](https://github.com/ManiVaultStudio/UMAP-Plugin) | Analysis | 1.4 | 1.4.0 | ![last commit](https://img.shields.io/github/last-commit/ManiVaultStudio/UMAP-Plugin/main) | ![ci-build](https://github.com/ManiVaultStudio/UMAP-Plugin/actions/workflows/build.yml/badge.svg?branch=main) |
+
+_Last status checked at 2025-08-05 12:45 UTC_
