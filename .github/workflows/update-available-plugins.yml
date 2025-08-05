@@ -1,36 +1,39 @@
 name: Update Available-Plugins Table
 
 on:
-  schedule:
-    - cron: '53 12 * * *'    # at minute 50 of hour 12 UTC, every day (the first run will be today at 12:50)
   workflow_dispatch:
 
 jobs:
   regen-table:
     runs-on: ubuntu-latest
     steps:
+      # 1. Checkout the branch that triggered this run, with full history so we can commit back
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          persist-credentials: true   # so pushes use the built-in GITHUB_TOKEN
 
+      # 2. Prepare Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
+      # 3. Install our one dependency
+      - name: Install requests
         run: pip install requests
 
+      # 4. Regenerate the table
       - name: Generate plugins table
         env:
           CORE_PREFIX: ${{ secrets.CORE_PREFIX }}
-        run: |
-          python scripts/gen_dev_wiki_table.py > Available-Plugins.md
+        run: python scripts/gen_dev_wiki_table.py > Available-Plugins.md
 
+      # 5. Commit & push the updated file back to the same branch
       - name: Commit & push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "chore: auto-update Available-Plugins.md"
           file_pattern: Available-Plugins.md
-          branch: test-auto-update-available-plugins
+          branch: ${{ github.ref_name }}  # push back to the branch that triggered the run
