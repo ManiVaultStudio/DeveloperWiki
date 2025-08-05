@@ -1,0 +1,37 @@
+name: Update Available-Plugins Table
+
+on:
+  workflow_dispatch:      # manual trigger
+  push:
+    branches:
+      - test-auto-update-available-plugins
+
+jobs:
+  regen-table:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate plugins table
+        env:
+          CORE_PREFIX: ${{ secrets.CORE_PREFIX }}
+        run: |
+          python scripts/gen_dev_wiki_table.py > Available-Plugins.md
+
+      - name: Commit & push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: auto-update Available-Plugins.md"
+          file_pattern: Available-Plugins.md
+          branch: test-auto-update-available-plugins
