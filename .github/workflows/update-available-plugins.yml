@@ -1,26 +1,28 @@
 name: Update Available-Plugins Table
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - test-auto-update-available-plugins
 
 jobs:
   regen-table:
     runs-on: ubuntu-latest
     steps:
-      # 1. Checkout the branch that triggered this run, with full history so we can commit back
+      # 1. Checkout the branch that was pushed
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          persist-credentials: true   # so pushes use the built-in GITHUB_TOKEN
+          persist-credentials: true
 
-      # 2. Prepare Python
+      # 2. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # 3. Install our one dependency
+      # 3. Install HTTP library
       - name: Install requests
         run: pip install requests
 
@@ -36,4 +38,4 @@ jobs:
         with:
           commit_message: "chore: auto-update Available-Plugins.md"
           file_pattern: Available-Plugins.md
-          branch: ${{ github.ref_name }}  # push back to the branch that triggered the run
+          branch: test-auto-update-available-plugins
