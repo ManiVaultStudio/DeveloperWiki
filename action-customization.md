@@ -27,6 +27,7 @@ layout->addWidget(decimalActionSlider->createWidget(this));
 ### 2. During the creation of the action's widget
 The look and feel of an action's GUI can also be modified when creating the action widget. This is achieved by supplying `WidgetAction::createWidget()` with additional widget flags. Building on the previous example, the code then becomes:
 
+Test
 ```cpp
 
 // Create a single decimal action
